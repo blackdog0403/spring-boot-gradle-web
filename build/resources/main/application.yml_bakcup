@@ -1,0 +1,33 @@
+# Allow Thymeleaf templates to be reloaded at dev time
+springthymeleaf.cache: false
+server.tomcat.access_log_enabled: true
+server.tomcat.basedir: target/tomcat
+# Actuator Setup
+
+endpoints.enabled=false
+endpoints.actuator.enabled=true
+endpoints.actuator.path=/actuators
+endpoints.actuator.sensitive=false
+endpoints.health.enabled=true
+endpoints.health.sensitive=false
+
+
+# logback configuration
+logging.level.org.springframework.web=INFO
+logging.level.sample.web.ui.mvc=INFO
+logging.level.sample.web.ui.rest=INFO
+logging.file=logs/spring-boot-logging.log
+
+#
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web: INFO
+#    sample:
+#      web:
+#        ui:
+#          mvc: INFO
+#          rest: INFO
+
+

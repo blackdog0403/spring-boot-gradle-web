@@ -5,11 +5,11 @@
 build/
 logs/
 out/
-target
+target/
 bin
 .classpath
 .metadata
 .pmd
 bash.exe.stackdump
 **.iml
-
+.war

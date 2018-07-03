@@ -3,13 +3,13 @@
 .settings
 .project
 build
-logs/
-out/
-target/
+logs
+out
+target
 bin
 .classpath
 .metadata
 .pmd
-bash.exe.stackdump
+bash.exe.st ackdump
 **.iml
 .war

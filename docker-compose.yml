@@ -1,0 +1,67 @@
+version: "3"
+services:
+  nginx:
+    image: blackdog0403/nginx:0.0.1-RELEASE
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 500M
+      restart_policy:
+        condition: on-failure
+    volumes:
+          - ./logs/nginx:/var/log/nginx/mydemoapp
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+  web-pri:
+    image: blackdog0403/webapp:0.0.1-RELEASE
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 500M
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - nginx
+    volumes:
+          - ./logs/web-pri:/App/springbootsampleapp/logs
+    ports:
+      - "4001:8080"
+    networks:
+      - webnet
+  web-sec:
+    image: blackdog0403/webapp:0.0.1-RELEASE
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 500M
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - nginx
+    volumes:
+          - ./logs/web-sec:/App/springbootsampleapp/logs
+    ports:
+      - "4002:8080"
+    networks:
+      - webnet
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - webnet
+networks:
+  webnet:

@@ -18,12 +18,13 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 
 group = 'org.springframework.boot'
-version = '0.0.1-RELEASE'
+version = project.property('projVersion')//'0.0.1-RELEASE'
 
 description = """Spring Boot Web UI Sample"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
@@ -46,3 +47,9 @@ dependencies {
 //}
 //
 
+//war {
+//    baseName = 'springbootsampleapp'
+//    version = project.property('projVersion')
+//}
+//
+//

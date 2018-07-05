@@ -18,7 +18,7 @@ services:
     networks:
       - webnet
   web-pri:
-    image: blackdog0403/webapp:v1
+    image: blackdog0403/webapp:v2
     deploy:
       replicas: 1
 #      resources:

@@ -4,15 +4,15 @@ set -e
 
 echo "devops.sh controls deployment for a docker swarm cluster"
 
-if (( $# != 2 ))
+if (( $# != 1 ))
 then
-    echo "Usage : ./devops.sh [start | stop | restart | deploy] [verions] " 1>&2
+    echo "Usage : ./devops.sh [start | stop | restart | deploy] [version] " 1>&2
     echo "ex    : ./devops.sh deploy v1" 1>&2
     exit 1
 fi
 
 CMD=$1
-VERSION=$2
+#VERSION=$2
 
 case "$CMD" in
 
@@ -37,13 +37,13 @@ restart)
     echo "restart"
     docker stack rm mydemoapp
     sleep 30
-    docker stack deploy -c docker-compose.yml  mydemoapp
+    docker stack deploy -c docker-compose.yml mydemoapp
     ;;
 
-deploy)
-    echo "deploy"
-    source gradle-build.sh ${VERSION}
-    source docker-build.sh ${VERSION}
+redeploy)
+    echo "redeploy"
+#    source gradle-build.sh ${VERSION}
+#    source docker-build.sh ${VERSION}
     docker stack deploy -c docker-compose.yml --resolve-image=changed mydemoapp
     ;;
 *)

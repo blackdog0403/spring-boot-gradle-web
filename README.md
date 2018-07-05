@@ -23,16 +23,24 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 ```
 - 위와 같이 정상적으로 swarm 노드가 추가됐는지 확인한다.
 
-## 2. Deploy to docker swarm
-- 아래의 명령어로 
+## 2. 배포하기
+
+- 아래의 명령어로 배포, 삭제, 재시작, 재배포를 할 수 있다.
+```bash
+$ ./devops.sh [ deploy | stop | restart | redeploy ] [version]
+```
+- deploy    : 컨테이너 전체 환경 실행
+- stop      : 컨테이너 전체 환경 중지
+- restart   : 컨테이너 전체 환경 재시작
+- redeploy  : 변경된 docker-compose 상태(Desire state)로 재배포 (최초라면 deploy와 동일)
+ 
+- docker-compose.yml 파일을 원하는 구성으로 수정한 다음의 명령어를 수행
 ```bash
 docker stack deploy -c docker-compose.yml --resolve-image=changed mydemoapp
 ```
-```
-
-## Undeploy to docker swarm
+## 3. 무중단배포하기 Demo
+- v1 버전으로 배포한 앱을 v2로 무중단 배포하는 demo
+- Blue green deployment 전략으로 배포함.
 ```bash
-docker stack rm mydemoapp
-docker swarm leave --force
+./blue-green-deploy.sh
 ```
-

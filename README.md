@@ -35,7 +35,7 @@ $ ./devops.sh [ deploy | stop | restart | redeploy ] [version]
 - redeploy  : 변경된 docker-compose 상태(Desire state)로 무중단재배포(Rolling update) 
 
 ### 1) devops.sh 파일 이용하기
-다음의 명령어로 mydemoapp을 실행한다. 
+- 다음의 명령어로 mydemoapp을 실행한다. 
 ```bash
 $ ./devops.sh deploy
 ```
@@ -53,7 +53,7 @@ $ curl http://localhost
 docker stack deploy -c docker-compose.yml --resolve-image=changed mydemoapp
 ```
 
-## 4. Explicit Blue-Green Deployment  Demo
+## 3. Explicit Blue-Green Deployment  Demo
 
 - v1 버전으로 배포한 앱을 v2로 무중단 배포하는 demo
 

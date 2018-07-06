@@ -3,10 +3,10 @@ services:
   nginx:
     image: blackdog0403/nginx:v1
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
-      interval: 1m30s
+      test: ["CMD", "cat", "/var/run/nginx.pid"]
+      interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 10
     deploy:
       replicas: 2
       update_config:
@@ -27,9 +27,9 @@ services:
     image: blackdog0403/webapp:v1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 1m30s
+      interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 10
     deploy:
       replicas: 2
       update_config:
@@ -49,9 +49,9 @@ services:
     image: blackdog0403/webapp:v1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-      interval: 1m30s
+      interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 10
     deploy:
       replicas: 2
       update_config:

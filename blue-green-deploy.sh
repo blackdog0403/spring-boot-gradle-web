@@ -11,7 +11,7 @@ sleep 5
 
 echo "Deploy new application to primary"
 docker stack deploy -c docker-compose.blue.yml --resolve-image=changed mydemoapp
-sleep 40
+sleep 60
 
 echo "Route to pri"
 cat conf/nginx.conf_pri > conf/nginx.conf
@@ -20,7 +20,7 @@ sleep 5
 
 echo "Deploy new application to secondary"
 docker stack deploy -c docker-compose.green.yml --resolve-image=changed mydemoapp
-sleep 40
+sleep 60
 
 echo "Route round robin"
 cat conf/nginx.conf_rr > conf/nginx.conf

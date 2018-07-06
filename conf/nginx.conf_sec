@@ -18,7 +18,7 @@ http {
     sendfile on;
 
     upstream docker-nginx {
-        server mydemoapp_web-sec:8080 max_fails=1 fail_timeout=60s;
+        server mydemoapp_web-sec:8080 max_fails=30 fail_timeout=10s;
     }
 
     server {

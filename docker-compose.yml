@@ -2,16 +2,15 @@ version: "3"
 services:
   nginx:
     image: blackdog0403/nginx:v1
-#    healthcheck:
-#      test: ["CMD", "curl", "-f", "http://localhost"]
-#      interval: 1m30s
-#      timeout: 10s
-#      retries: 3
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
     deploy:
       replicas: 2
       update_config:
         parallelism: 1
-        delay: 60s
       restart_policy:
         condition: on-failure
     volumes:
@@ -22,9 +21,9 @@ services:
     networks:
       - webnet
   web-pri:
-    image: blackdog0403/webapp:v1
+    image: blackdog0403/webapp:v2
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 1m30s
       timeout: 10s
       retries: 3
@@ -32,7 +31,7 @@ services:
       replicas: 2
       update_config:
         parallelism: 1
-        delay: 60s
+#        delay: 60s
       restart_policy:
         condition: on-failure
     depends_on:
@@ -44,9 +43,9 @@ services:
     networks:
       - webnet
   web-sec:
-    image: blackdog0403/webapp:v1
+    image: blackdog0403/webapp:v2
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 1m30s
       timeout: 10s
       retries: 3
@@ -54,7 +53,7 @@ services:
       replicas: 2
       update_config:
         parallelism: 1
-        delay: 60s
+#        delay: 60s
       restart_policy:
         condition: on-failure
     depends_on:

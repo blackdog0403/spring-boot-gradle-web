@@ -18,7 +18,7 @@ echo "Deploy new application to primary"
 docker stack deploy -c docker-compose.blue.yml --resolve-image=changed mydemoapp
 sleep 60
 
-echo "Route to pri"
+echo "Route to primary"
 cat conf/nginx/nginx.conf_pri > conf/nginx/nginx.conf
 
 CID=$(docker ps | awk '{print $NF}' | grep nginx)

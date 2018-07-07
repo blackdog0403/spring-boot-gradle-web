@@ -6,7 +6,7 @@ echo "devops.sh controls deployment for a docker swarm cluster"
 
 if (( $# != 1 ))
 then
-    echo "Usage : ./devops.sh [start | stop | restart | deploy] [version] " 1>&2
+    echo "Usage : ./devops.sh [start | stop | restart | redeploy] [version] " 1>&2
     echo "ex    : ./devops.sh deploy v1" 1>&2
     exit 1
 fi

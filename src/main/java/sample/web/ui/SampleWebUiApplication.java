@@ -16,27 +16,29 @@
 
 package sample.web.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @SpringBootApplication
+@EnableRedisHttpSession
 public class SampleWebUiApplication extends SpringBootServletInitializer {
 
-	@Bean
-	public MessageRepository messageRepository() {
-		return new InMemoryMessageRepository();
-	}
+	@Autowired
+	public MessageRepository messageRepository;
 
 	@Bean
 	public Converter<String, Message> messageConverter() {
 		return new Converter<String, Message>() {
 			@Override
 			public Message convert(String id) {
-				return messageRepository().findMessage(Long.valueOf(id));
+				return messageRepository.findMessage(Long.valueOf(id));
 			}
 		};
 	}

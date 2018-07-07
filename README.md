@@ -62,8 +62,7 @@ docker stack deploy -c docker-compose.yml --resolve-image=changed mydemoapp
 $ ./devops.sh deploy
 ```
 
-### 2) docker-compose.yml의 webapp 이미지들의 tag를 v2으로 수정하고 다음의 명령어로 배포한다.
-- Blue green deployment 전략으로 배포함.
+### 2) 다음의 명령어로 Blue-Green 전략으로 배포를 한다.
 ```bash
 $ ./blue-green-deploy.sh
 ```

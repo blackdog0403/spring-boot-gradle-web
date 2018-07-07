@@ -15,6 +15,7 @@ services:
       restart_policy:
         condition: on-failure
     volumes:
+          - ./logs/redis:/var/log/redis
           - ./conf/redis/redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - "6379:6379"
@@ -44,7 +45,7 @@ services:
     networks:
       - webnet
   web-pri:
-    image: blackdog0403/webapp:v1-session
+    image: blackdog0403/webapp:v1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
@@ -66,7 +67,7 @@ services:
     networks:
       - webnet
   web-sec:
-    image: blackdog0403/webapp:v1-session
+    image: blackdog0403/webapp:v1
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s

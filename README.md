@@ -27,7 +27,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 - 아래의 명령어로 배포, 삭제, 재시작, 재배포를 할 수 있다.
 ```bash
-$ ./devops.sh [ deploy | stop | restart | redeploy ] [version]
+$ ./devops.sh [ deploy | stop | restart | redeploy ]
 ```
 - deploy    : 컨테이너 전체 환경 실행
 - stop      : 컨테이너 전체 환경 중지

@@ -6,7 +6,7 @@ echo "devops.sh controls deployment for a docker swarm cluster"
 
 if (( $# != 1 ))
 then
-    echo "Usage : ./devops.sh [start | stop | restart | redeploy] [version] " 1>&2
+    echo "Usage : ./devops.sh [deploy | stop | restart | redeploy] [version] " 1>&2
     echo "ex    : ./devops.sh deploy v1" 1>&2
     exit 1
 fi
@@ -23,8 +23,8 @@ init)
 #    source docker-build.sh ${VERSION}
     ;;
 
-start)
-    echo "start"
+deploy)
+    echo "deploy"
     docker stack deploy -c docker-compose.yml --resolve-image=always mydemoapp
     ;;
 

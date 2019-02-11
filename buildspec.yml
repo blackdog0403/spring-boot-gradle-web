@@ -16,10 +16,10 @@ phases:
         # - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
-      - gradle clean build
+      - gradle clean build -PprojVersion=${APP_VERSION}
       - ls -al
       - pwd
-      - docker build --no-cache -f Dockerfile-webapp --tag $REPOSITORY_URI:$TAG .
+      - docker build --no-cache -f Dockerfile-webapp --build-arg APP_VERSION=${APP_VERSION} --tag $REPOSITORY_URI:$TAG .
   post_build:
     commands:
       - docker push $REPOSITORY_URI:$TAG

@@ -45,7 +45,7 @@ spec:
             - name: log-volume
               mountPath:  /App/springbootsampleapp/logs
             - name: tmp-volume
-              mountPath:  /App/springbootsampleapp/logs
+              mountPath:  /tmp
           ports:
             - containerPort: 8080
 

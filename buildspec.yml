@@ -3,22 +3,20 @@ version: 0.2
 phases:
   install:
     commands:
-      - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
+      # - curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
       # - curl -sS -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/kubectl
-      - chmod +x ./aws-iam-authenticator # ./kubectl 
+      # - chmod +x ./aws-iam-authenticator # ./kubectl 
       - export PATH=$PWD/:$PATH
-      - apt-get update && apt-get -y install jq python3-pip python3-dev && pip3 install --upgrade awscli
+      # - apt-get update && apt-get -y install jq python3-pip python3-dev && pip3 install --upgrade awscli
   pre_build:
       commands:
         - TAG="$REPOSITORY_NAME.$REPOSITORY_BRANCH.$ENVIRONMENT_NAME.$(date +%Y-%m-%d.%H.%M.%S).$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-        # - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' hello-k8s.yml
+        # - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' optank-webapp-k8s.yml
         - $(aws ecr get-login --no-include-email)
         # - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
       - gradle clean build -PprojVersion=${APP_VERSION}
-      - ls -al
-      - pwd
       - docker build --no-cache -f Dockerfile-webapp --build-arg APP_VERSION=${APP_VERSION} --tag $REPOSITORY_URI:$TAG .
   post_build:
     commands:
@@ -29,7 +27,7 @@ phases:
       # - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       # - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       # - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
-      # - kubectl apply -f hello-k8s.yml
-      - printf '[{"name":"hello-k8s","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
+      # - kubectl apply -f optank-webapp-k8s.yml
+      - printf '[{"name":"optank-webapp-k8s","imageUri":"%s","tag":"%s"}]' $REPOSITORY_URI:$TAG $TAG> build.json
 artifacts:
   files: build.json

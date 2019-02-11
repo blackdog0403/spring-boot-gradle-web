@@ -30,4 +30,7 @@ phases:
       # - kubectl apply -f optank-webapp-k8s.yml
       - printf '[{"name":"optank-webapp-k8s","imageUri":"%s","tag":"%s"}]' $REPOSITORY_URI:$TAG $TAG> build.json
 artifacts:
-  files: build.json, buildspec-deploy.yml, optank-webapp-k8s.yml
+  files: 
+   - build.json
+   - buildspec-deploy.yml
+   - optank-webapp-k8s.yml

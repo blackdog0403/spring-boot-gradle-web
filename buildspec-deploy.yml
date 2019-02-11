@@ -10,6 +10,7 @@ phases:
       - apt-get update && apt-get -y install jq python3-pip python3-dev && pip3 install --upgrade awscli
   pre_build:
       commands:
+        - ls -al
         - TAG=$(cat build.json | jq -r .tag)
         - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' optank-webapp-k8s.yml
         - export KUBECONFIG=$HOME/.kube/config

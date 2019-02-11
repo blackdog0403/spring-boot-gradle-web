@@ -17,8 +17,9 @@ phases:
   build:
     commands:
       - gradle clean build
-      - docker build --tag $REPOSITORY_URI:$TAG .
-
+      - ls -al
+      - pwd
+      - docker build --no-cache -f Dockerfile-webapp --tag $REPOSITORY_URI:$TAG .
   post_build:
     commands:
       - docker push $REPOSITORY_URI:$TAG

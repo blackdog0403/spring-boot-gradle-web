@@ -1,32 +1,14 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: optank-webapp
-  labels:
-    app: optank-webapp
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-    - host: optank-webapp.blackdog0403.com
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: optank-webapp
-              servicePort: 80
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: optank-webapp
+  name: optank-webapp-v1
 spec:
   type: ClusterIP
   ports:
     - port: 80
       targetPort: 8080
   selector:
-    app: optank-webapp
+    app: optank-webapp-v1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -41,11 +23,11 @@ spec:
       maxSurge: 2
   selector:
     matchLabels:
-      app: optank-webapp
+      app: optank-webapp-v1
   template:
     metadata:
       labels:
-        app: optank-webapp
+        app: optank-webapp-v1
     spec:
       volumes:
         - name: log-volume

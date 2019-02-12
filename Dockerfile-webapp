@@ -1,4 +1,4 @@
-FROM java:openjdk-8u111-jdk-alpine
+FROM openjdk:12-jdk-alpine
 ARG APP_VERSION=v1
 RUN apk update && apk add curl
 WORKDIR /App/springbootsampleapp

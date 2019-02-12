@@ -12,7 +12,7 @@ phases:
       commands:
         - ls -al
         - TAG=$(cat build.json | jq -r .[].tag)
-        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' optank-webapp-blue.yml
+        - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' optank-webapp-green.yml
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
@@ -22,10 +22,10 @@ phases:
       - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
-      - kubectl apply -f optank-webapp-blue.yml
+      - kubectl apply -f optank-webapp-green.yml
   post_build:
     commands:
-      - printf '[{"name":"optank-webapp-blue","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > deploy.json
+      - printf '[{"name":"optank-webapp-green","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > deploy.json
 
 artifacts:
   files: deploy.json

@@ -14,3 +14,4 @@ bin
 bash.exe.st ackdump
 **.iml
 .war
+.vscode

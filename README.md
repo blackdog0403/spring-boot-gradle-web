@@ -27,7 +27,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 - 아래의 명령어로 배포, 삭제, 재시작, 재배포를 할 수 있다.
 ```bash
-$ ./devops.sh [ deploy | stop | restart | redeploy ] [version]
+$ ./devops.sh [ deploy | stop | restart | redeploy ]
 ```
 - deploy    : 컨테이너 전체 환경 실행
 - stop      : 컨테이너 전체 환경 중지
@@ -62,8 +62,7 @@ docker stack deploy -c docker-compose.yml --resolve-image=changed mydemoapp
 $ ./devops.sh deploy
 ```
 
-### 2) docker-compose.yml의 webapp 이미지들의 tag를 v2으로 수정하고 다음의 명령어로 배포한다.
-- Blue green deployment 전략으로 배포함.
+### 2) 다음의 명령어로 Blue-Green 전략으로 배포를 한다.
 ```bash
 $ ./blue-green-deploy.sh
 ```

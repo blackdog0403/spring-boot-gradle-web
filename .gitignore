@@ -3,6 +3,8 @@
 .settings
 .project
 .vscode
+.metadata
+.classpath
 build
 logs
 out
@@ -14,3 +16,4 @@ bin
 bash.exe.st ackdump
 **.iml
 .war
+.vscode

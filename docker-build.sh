@@ -14,3 +14,5 @@ echo ${VERSION}
 docker build --no-cache --build-arg APP_VERSION=${VERSION} -f Dockerfile-webapp -t blackdog0403/webapp:${VERSION} .
 
 #docker build --no-cache --build-arg APP_VERSION=${VERSION} -f Dockerfile-nginx  -t blackdog0403/nginx:${VERSION} .
+
+# docker build --no-cache --build-arg APP_VERSION=v1 -f Dockerfile-redis -t blackdog0403/redis:v1 .

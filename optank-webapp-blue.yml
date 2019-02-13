@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: optank-webapp-blue
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: optank-webapp-blue
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: optank-webapp-blue
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 2
+  selector:
+    matchLabels:
+      app: optank-webapp-blue
+  template:
+    metadata:
+      labels:
+        app: optank-webapp-blue
+    spec:
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+        - name: tmp-volume
+          emptyDir: {}
+      containers:
+        - name: optank-webapp-blue
+          image: CONTAINER_IMAGE
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - name: log-volume
+              mountPath:  /App/springbootsampleapp/logs
+            - name: tmp-volume
+              mountPath:  /tmp
+          ports:
+            - containerPort: 8080
+

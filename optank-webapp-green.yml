@@ -10,16 +10,31 @@ spec:
   selector:
     app: optank-webapp-green
 ---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: optank-webapp-green
+  labels:
+    app: optank-webapp-green
+ spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: optank-webapp-green
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 50
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: optank-webapp-green
 spec:
-  replicas: 3
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 2
+      maxUnavailable: 1
       maxSurge: 2
   selector:
     matchLabels:

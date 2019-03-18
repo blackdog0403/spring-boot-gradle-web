@@ -2,8 +2,7 @@
 .idea/
 .settings
 .project
-.metadata
-.classpath
+.vscode
 build
 logs
 out
